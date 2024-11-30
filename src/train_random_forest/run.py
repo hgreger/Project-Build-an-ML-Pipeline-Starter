@@ -17,7 +17,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OrdinalEncoder, FunctionTransformer
+from sklearn.preprocessing import OrdinalEncoder, FunctionTransformer, OneHotEncoder
 
 import wandb
 from sklearn.ensemble import RandomForestRegressor
@@ -95,13 +95,13 @@ def go(args):
     ######################################
     # Save the sk_pipe pipeline as a mlflow.sklearn model in the directory "random_forest_dir"
     # HINT: use mlflow.sklearn.save_model
-    signature = mlflow.models.infer_signature(X_val, y_pred)
+    # signature = mlflow.models.infer_signature(X_val, y_pred)
     dir = "random_forest_dir"
 
     mlflow.sklearn.save_model(
         sk_pipe,
         dir,
-        signature = signature,
+        # signature = signature,
         input_example = X_train.iloc[:5]
     )
     ######################################
